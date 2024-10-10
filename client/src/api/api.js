@@ -1,12 +1,12 @@
 import axios from "axios";
 import { API_URL } from "../store/authStore";
 
-const API_URL_BLOG = "http://localhost:8000"; // blog based operations
+const API_URL_BLOG = API_URL; // blog based operations
 
 // update user profile
 export const updateProfile = async (data) => {
   try {
-    const response = await axios.patch(`${API_URL}/update`, data);
+    const response = await axios.patch(`${API_URL}auth/update`, data);
     return response.data;
   } catch (error) {
     throw error;
@@ -16,7 +16,7 @@ export const updateProfile = async (data) => {
 //write a blog
 export const writeBlog = async (newBlog) => {
   try {
-    const response = await axios.post(`${API_URL_BLOG}/api/blogs`, {
+    const response = await axios.post(`${API_URL_BLOG}blogs`, {
       title: newBlog.title,
       body: newBlog.body,
       category: newBlog.category,
@@ -33,7 +33,7 @@ export const writeBlog = async (newBlog) => {
 // fetch all blogs
 export const fetchBlogs = async (category) => {
   try {
-    const response = await axios.get(`${API_URL_BLOG}/api/blogs`, {
+    const response = await axios.get(`${API_URL_BLOG}blogs`, {
       params: category ? { category } : {},
     });
     return response.data;
@@ -45,7 +45,7 @@ export const fetchBlogs = async (category) => {
 // fetch a single blog
 export const fetchBlog = async (id) => {
   try {
-    const response = await axios.get(`${API_URL_BLOG}/api/blogs/${id}`);
+    const response = await axios.get(`${API_URL_BLOG}blogs/${id}`);
     return response.data;
   } catch (error) {
     throw error;
@@ -55,7 +55,7 @@ export const fetchBlog = async (id) => {
 // fetch user by use id
 export const fetchUser = async (id) => {
   try {
-    const response = await axios.get(`${API_URL_BLOG}/api/blogs/user/${id}`);
+    const response = await axios.get(`${API_URL_BLOG}blogs/user/${id}`);
     return response.data;
   } catch (error) {
     throw error;
@@ -66,12 +66,9 @@ export const fetchUser = async (id) => {
 export const writeComment = async (id, commentData) => {
   console.log(commentData);
   try {
-    const response = await axios.post(
-      `${API_URL_BLOG}/api/blogs/comment/${id}`,
-      {
-        comment: commentData,
-      }
-    );
+    const response = await axios.post(`${API_URL_BLOG}blogs/comment/${id}`, {
+      comment: commentData,
+    });
 
     return response.data;
   } catch (error) {
@@ -82,9 +79,7 @@ export const writeComment = async (id, commentData) => {
 // delete a commnent
 export const deleteComment = async (id) => {
   try {
-    const response = await axios.delete(
-      `${API_URL_BLOG}/api/blogs/comment/${id}`
-    );
+    const response = await axios.delete(`${API_URL_BLOG}blogs/comment/${id}`);
     return response.data;
   } catch (error) {
     throw error;
@@ -94,10 +89,7 @@ export const deleteComment = async (id) => {
 // update a blog
 export const updateBlog = async (id, newBlog) => {
   try {
-    const response = await axios.put(
-      `${API_URL_BLOG}/api/blogs/${id}`,
-      newBlog
-    );
+    const response = await axios.put(`${API_URL_BLOG}blogs/${id}`, newBlog);
 
     return response.data;
   } catch (error) {
@@ -108,7 +100,7 @@ export const updateBlog = async (id, newBlog) => {
 // delete a blog
 export const deleteBlog = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL_BLOG}/api/blogs/${id}`);
+    const response = await axios.delete(`${API_URL_BLOG}blogs/${id}`);
     return response.data;
   } catch (error) {
     throw error;

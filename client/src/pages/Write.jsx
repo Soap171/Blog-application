@@ -76,6 +76,7 @@ function Write() {
         toast.dismiss();
         toast.success("Image uploaded successfully.");
       } catch (error) {
+        toast.dismiss();
         toast.error("Failed to upload image. Please try again.");
       }
     }

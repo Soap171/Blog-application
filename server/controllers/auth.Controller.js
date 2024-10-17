@@ -273,6 +273,8 @@ export const google = async (req, res, next) => {
         message: "user created successfully",
         user: rest,
       });
+
+      await sendWelcomeEmail(user.email, user.name, next);
     }
   } catch (error) {
     return next(errorHandler(error));
